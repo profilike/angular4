@@ -3,19 +3,21 @@
       Страница записей <span class="sparkline bar"></span>
   </h3>
 </div>
-
-<section class="section">
+<section class="section text-center" *ngIf="!isLoaded">
+    Loading...
+</section>
+<section class="section" *ngIf="isLoaded">
   <div class="row">
       <div class="col-md-6">
-          <vp-add-event></vp-add-event>
+          <vp-add-event [categories]="categories"></vp-add-event>
       </div>
       <div class="col-md-6">
-         <vp-add-category></vp-add-category>
+         <vp-add-category (onCategoryAdd)="newCategoryAdded($event)"></vp-add-category>
       </div>
   </div>
   <div class="row">
       <div class="col-md-6">
-        <vp-edit-category></vp-edit-category>
+        <vp-edit-category (onCategoryEdit)="categoryWasEdited($event)" [categories]="categories"></vp-edit-category>
       </div>
   </div>
 </section>
