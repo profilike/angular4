@@ -5,11 +5,14 @@ import { User } from '../../shared/models/user.model';
 import { Message } from '../../shared/models/message.model';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { fadeStateTrigger } from '../../shared/animations/fade.animation';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'vp-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.sass']
+  styleUrls: ['./login.component.sass'],
+  animations: [fadeStateTrigger]
 })
 export class LoginComponent implements OnInit {
 
@@ -20,8 +23,16 @@ export class LoginComponent implements OnInit {
     private userService: UsersService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private title: Title,
+    private meta: Meta
+  ) { 
+    title.setTitle('Вход в систему');
+    meta.addTags([
+      {name: 'keywords', content: 'логин, вход, система' },
+      {name: 'description', content: 'Страница для входа в систему' }
+    ])
+  }
 
   ngOnInit() {
 
@@ -34,6 +45,11 @@ export class LoginComponent implements OnInit {
           this.showMessage({
             text: 'Терерь вы можете зайти в систему', 
             type: 'success'
+          });
+        } else if (params['accessDenied']) {
+          this.showMessage({
+            text: 'Для работы с системой вам необходимо войти', 
+            type: 'warning'
           });
         }
       });

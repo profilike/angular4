@@ -25,7 +25,8 @@ export class BillPageComponent implements OnInit, OnDestroy {
     this.sub1 = Observable.combineLatest(
       this.billService.getBill(),
       this.billService.getCurrency()
-    ).subscribe((data: [Bill, any]) => {
+    )
+    .subscribe((data: [Bill, any]) => {
       //console.log(data);
       this.bill = data[0];
       this.currency = data[1]
