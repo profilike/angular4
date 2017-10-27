@@ -9,7 +9,7 @@ import { HistoryDetailComponent } from './history-page/history-detail/history-de
 import { AuthGuard } from '../shared/services/auth.guard';
 
 const routes: Routes = [
-    { path: '', component: SystemComponent, /*canActivate: [AuthGuard],*/ children: [
+    { path: '', component: SystemComponent, canActivate: [AuthGuard], children: [
         { path: 'bill', component: BillPageComponent },
         { path: 'history', component: HistoryPageComponent },
         { path: 'planning', component: PlanningPageComponent },
